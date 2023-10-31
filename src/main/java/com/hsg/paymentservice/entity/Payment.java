@@ -10,13 +10,14 @@ import java.util.UUID;
 @Table(name = "payment")
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Data
 @EqualsAndHashCode(of = {"id"})
 @ToString
 public class Payment {
 
     @Id
     @SequenceGenerator(name = "seq_payment", allocationSize = 1)
+    @Column(length = 36, name = "approvalCode")
 //    @GeneratedValue(generator = "seq_payment", strategy = GenerationType.SEQUENCE)
     private String approvalCode = UUID.randomUUID().toString();
 
@@ -30,7 +31,7 @@ public class Payment {
     private String merchantId;
 
     @Column(length = 16, name = "paymentDate")
-    private LocalDateTime paymentDate;
+    private LocalDateTime paymentDate = LocalDateTime.now();
 
     @Setter
     @Column(length = 5, name = "isReported")

@@ -1,11 +1,14 @@
 package com.hsg.paymentservice.controller;
 
 import com.hsg.paymentservice.dto.PaymentDto;
+import com.hsg.paymentservice.entity.Payment;
 import com.hsg.paymentservice.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,8 +24,9 @@ public class PaymentController {
     }
 
     @PostMapping
-    public ResponseEntity<PaymentDto> save(@RequestBody PaymentDto paymentDto) {
-        return ResponseEntity.ok(paymentService.save(paymentDto));
+    public ResponseEntity<Payment> save(@Validated @RequestBody PaymentDto paymentDto) {
+        return new ResponseEntity<>(paymentService.save(paymentDto), HttpStatus.CREATED);
+
     }
 
     @GetMapping

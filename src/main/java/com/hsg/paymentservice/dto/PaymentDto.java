@@ -1,6 +1,7 @@
 package com.hsg.paymentservice.dto;
 
 import lombok.*;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -11,6 +12,6 @@ public class PaymentDto {
     private float amount;
     private int creditCardNo;
     private String merchantId;
-    private String paymentDate;
+    private LocalDateTime paymentDate;
     private Boolean isReported;
 }

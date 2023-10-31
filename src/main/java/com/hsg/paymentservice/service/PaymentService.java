@@ -1,5 +1,6 @@
 package com.hsg.paymentservice.service;
 
+import com.hsg.paymentservice.configuration.DtoConverterService;
 import com.hsg.paymentservice.dto.PaymentDto;
 import com.hsg.paymentservice.entity.Payment;
 import com.hsg.paymentservice.repository.PaymentRepository;
@@ -8,13 +9,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class PaymentService {
 
     private final PaymentRepository paymentRepository;
+    private final DtoConverterService dtoConverterService;
     private final ModelMapper modelMapper;
 
     public PaymentDto get(String id) {
@@ -23,12 +24,19 @@ public class PaymentService {
         return modelMapper.map(payment, PaymentDto.class);
     }
 
-    @Transactional
-    public PaymentDto save(PaymentDto paymentDto) {
-        Payment payment = modelMapper.map(paymentDto, Payment.class);
-        payment = paymentRepository.save(payment);
-        paymentDto.setApprovalCode(payment.getApprovalCode());
-        return paymentDto;
+//     public Payment save(PaymentDto paymentDto) {
+//        Payment payment = dtoConverterService.dtoClassConverter(paymentDto, Payment.class);
+//        return paymentRepository.save(payment);
+//    }
+
+    public Payment save(PaymentDto paymentDto) {
+        Payment payment = new Payment();
+        payment.setAmount(paymentDto.getAmount());
+        payment.setCreditCardNo(paymentDto.getCreditCardNo());
+        payment.setMerchantId(paymentDto.getMerchantId());
+        payment.setApprovalCode(paymentDto.getApprovalCode());
+        payment.setPaymentDate(paymentDto.getPaymentDate());
+        return paymentRepository.save(payment);
     }
 
     public Slice<PaymentDto> findAll(Pageable pageable) {
