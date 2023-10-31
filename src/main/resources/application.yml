@@ -1,0 +1,14 @@
+server:
+  port: 8880
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: paymentservice
+    password: paymentservice
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
