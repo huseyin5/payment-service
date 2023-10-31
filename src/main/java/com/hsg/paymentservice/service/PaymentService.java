@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -25,23 +26,25 @@ public class PaymentService {
         return dtoConverterService.dtoClassConverter(payment, PaymentResponseDto.class);
     }
 
-    public Payment save(PaymentRequestDto paymentRequestDto) {
+    public Payment save(@Valid PaymentRequestDto paymentRequestDto) {
         Payment payment = dtoConverterService.dtoClassConverter(paymentRequestDto, Payment.class);
         return paymentRepository.save(payment);
     }
-
-//    public Payment save(PaymentDto paymentDto) {
-//        Payment payment = new Payment();
-//        payment.setAmount(paymentDto.getAmount());
-//        payment.setCreditCardNo(paymentDto.getCreditCardNo());
-//        payment.setMerchantId(paymentDto.getMerchantId());
-//        payment.setApprovalCode(paymentDto.getApprovalCode());
-//        payment.setPaymentDate(paymentDto.getPaymentDate());
-//        return paymentRepository.save(payment);
-//    }
 
     public List<PaymentResponseDto> findAll() {
         List<Payment> payments = paymentRepository.findAll();
         return dtoConverterService.dtoConverter(payments, PaymentResponseDto.class);
     }
+
+    public Float getReport(){
+        List<Payment> payments = paymentRepository.findByIsReported(false);
+        float totalAmount = 0;
+        for(Payment payment: payments)
+            totalAmount += payment.getAmount();
+        float finalTotalAmount = totalAmount;
+        payments.forEach(payment -> payment.setIsReported(true));
+        paymentRepository.saveAll(payments);
+        return finalTotalAmount;
+    }
+
 }

@@ -2,7 +2,10 @@ package com.hsg.paymentservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -30,12 +33,11 @@ public class Payment {
     @Column(length = 5, name = "merchantId")
     private String merchantId;
 
-
     @Column(length = 16, name = "paymentDate")
     private LocalDateTime paymentDate;
 
     @Column(length = 5, name = "isReported")
-    private Boolean isReported;
+    private Boolean isReported = false;
 
     public LocalDateTime getPaymentDate() {
         return paymentDate;

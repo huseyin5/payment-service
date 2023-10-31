@@ -9,9 +9,14 @@ import java.time.LocalDateTime;
 public class PaymentResponseDto {
 
     private String approvalCode;
+
     private float amount;
+
     private int creditCardNo;
+
     private String merchantId;
+
     private LocalDateTime paymentDate;
+
     private Boolean isReported;
 }
