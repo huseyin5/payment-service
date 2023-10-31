@@ -30,10 +30,19 @@ public class Payment {
     @Column(length = 5, name = "merchantId")
     private String merchantId;
 
-    @Column(length = 16, name = "paymentDate")
-    private LocalDateTime paymentDate = LocalDateTime.now();
 
-    @Setter
+    @Column(length = 16, name = "paymentDate")
+    private LocalDateTime paymentDate;
+
     @Column(length = 5, name = "isReported")
     private Boolean isReported;
+
+    public LocalDateTime getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDateTime paymentDate) {
+        this.paymentDate = LocalDateTime.now();
+    }
+
 }
