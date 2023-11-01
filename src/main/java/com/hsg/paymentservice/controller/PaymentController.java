@@ -39,4 +39,9 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.getReport());
     }
 
+    @GetMapping("/report/{merchantId}")
+    public ResponseEntity<Float> getReportByMerchant(@PathVariable("merchantId") String merchantId) {
+        return ResponseEntity.ok(paymentService.getReportByMerchant(merchantId));
+    }
+
 }

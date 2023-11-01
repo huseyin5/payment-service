@@ -18,7 +18,6 @@ public class PaymentService {
 
     private final PaymentRepository paymentRepository;
     private final DtoConverterService dtoConverterService;
-    private final ModelMapper modelMapper;
 
     public PaymentResponseDto get(String id) {
         Payment payment = paymentRepository.findById(id)
@@ -38,6 +37,17 @@ public class PaymentService {
 
     public Float getReport(){
         List<Payment> payments = paymentRepository.findByIsReported(false);
+        float totalAmount = 0;
+        for(Payment payment: payments)
+            totalAmount += payment.getAmount();
+        float finalTotalAmount = totalAmount;
+        payments.forEach(payment -> payment.setIsReported(true));
+        paymentRepository.saveAll(payments);
+        return finalTotalAmount;
+    }
+
+    public Float getReportByMerchant(String merchantId){
+        List<Payment> payments = paymentRepository.findByMerchantIdAndIsReported(merchantId, false);
         float totalAmount = 0;
         for(Payment payment: payments)
             totalAmount += payment.getAmount();

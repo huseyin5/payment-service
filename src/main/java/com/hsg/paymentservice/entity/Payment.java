@@ -2,10 +2,8 @@ package com.hsg.paymentservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -21,15 +19,17 @@ public class Payment {
     @Id
     @SequenceGenerator(name = "seq_payment", allocationSize = 1)
     @Column(length = 36, name = "approvalCode")
-//    @GeneratedValue(generator = "seq_payment", strategy = GenerationType.SEQUENCE)
     private String approvalCode = UUID.randomUUID().toString();
 
+    @NotNull(message = "Amount can not be null")
     @Column(length = 10, name = "amount")
     private float amount;
 
+    @NotNull(message = "Credit Card can not be null")
     @Column(length = 4, name = "ccNo")
     private int creditCardNo;
 
+    @NotNull(message = "Merchant Id can not be null")
     @Column(length = 5, name = "merchantId")
     private String merchantId;
 
