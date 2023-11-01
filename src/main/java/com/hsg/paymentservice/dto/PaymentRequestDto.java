@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
@@ -13,16 +14,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PaymentRequestDto {
 
-//    @NotBlank(message = "Amount can not be null")
-//    @Size(min = 1, max = 10, message = "Amount must be between 1 and 10 characters")
+    @NotNull(message = "Amount cannot be null")
     private float amount;
 
-//    @NotBlank(message = "Credit Card can not be null")
-//    @Size(min = 4, max = 4, message = "Credit Card must be 4 characters")
+    @NotNull(message = "Credit card no cannot be null")
     private int creditCardNo;
 
-//    @NotBlank(message = "Credit Card can not be null")
-//    @Size(min = 5, max = 5, message = "Merchant Id must be 5 characters")
+    @NotNull(message = "Currency cannot be blank")
     private String merchantId;
 
     private LocalDateTime paymentDate;
