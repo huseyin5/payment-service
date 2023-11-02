@@ -21,12 +21,19 @@ public class PaymentController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PaymentResponseDto> getPaymentDetail(@PathVariable("id") String id) {
-        return ResponseEntity.ok(paymentService.getpaymentDeatail(id));
+        return ResponseEntity.ok(paymentService.getPaymentDetail(id));
     }
 
     @PostMapping
-    public ResponseEntity<Payment> savePayment(@Validated @RequestBody PaymentRequestDto paymentRequestDto) {
-        return new ResponseEntity<>(paymentService.savePayment(paymentRequestDto), HttpStatus.CREATED);
+    public ResponseEntity<?> savePayment(@Validated @RequestBody PaymentRequestDto paymentRequestDto) {
+        try {
+            Payment payment = paymentService.savePayment(paymentRequestDto);
+            return new ResponseEntity<>(payment, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @GetMapping
@@ -39,9 +46,13 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.getReport());
     }
 
-    @GetMapping("/report/{merchantId}")
-    public ResponseEntity<String> getReportByMerchant(@PathVariable("merchantId") String merchantId) {
-        return ResponseEntity.ok(paymentService.getReportByMerchant(merchantId));
-    }
+//    @GetMapping("/report/{merchantId}")
+//    public ResponseEntity<String> getReportByMerchant(@PathVariable("merchantId") String merchantId) {
+//        return ResponseEntity.ok(paymentService.getReportByMerchant(merchantId));
+//    }
 
+    @GetMapping("/report/{merchantPosId}")
+    public ResponseEntity<String> getReportByMerchantPosId(@PathVariable("merchantPosId") String merchantPosId) {
+        return ResponseEntity.ok(paymentService.getReportByMerchantPosId(merchantPosId));
+    }
 }

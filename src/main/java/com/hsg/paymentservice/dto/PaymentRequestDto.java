@@ -24,4 +24,8 @@ public class PaymentRequestDto {
     private String merchantId;
 
     private LocalDateTime paymentDate;
+
+    private String merchantPosId;
+
+    private int confirmationCode;
 }

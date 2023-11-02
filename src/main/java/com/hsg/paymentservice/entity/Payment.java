@@ -39,6 +39,12 @@ public class Payment {
     @Column(length = 5, name = "isReported")
     private Boolean isReported = false;
 
+    @Column(length = 5, name = "merchantPosId")
+    private String merchantPosId;
+
+    @Column(length = 5, name = "confirmationCode")
+    private int confirmationCode;
+
     public LocalDateTime getPaymentDate() {
         return paymentDate;
     }
