@@ -14,18 +14,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PaymentRequestDto {
 
-    @NotNull(message = "Amount cannot be null")
     private float amount;
-
-    @NotNull(message = "Credit card no cannot be null")
     private int creditCardNo;
-
-    @NotNull(message = "Currency cannot be blank")
     private String merchantId;
-
     private LocalDateTime paymentDate;
-
     private String merchantPosId;
-
     private int confirmationCode;
+    private float totalReportedAmount;
 }

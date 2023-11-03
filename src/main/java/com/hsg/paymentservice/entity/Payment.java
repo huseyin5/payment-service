@@ -21,17 +21,17 @@ public class Payment {
     @Column(length = 36, name = "approvalCode")
     private String approvalCode = UUID.randomUUID().toString();
 
-    @NotNull(message = "Amount can not be null")
     @Column(length = 10, name = "amount")
     private float amount;
 
-    @NotNull(message = "Credit Card can not be null")
     @Column(length = 4, name = "ccNo")
     private int creditCardNo;
 
-    @NotNull(message = "Merchant Id can not be null")
     @Column(length = 5, name = "merchantId")
     private String merchantId;
+
+    @Column(length = 5, name = "merchantPosId")
+    private String merchantPosId;
 
     @Column(length = 16, name = "paymentDate")
     private LocalDateTime paymentDate;
@@ -39,18 +39,24 @@ public class Payment {
     @Column(length = 5, name = "isReported")
     private Boolean isReported = false;
 
-    @Column(length = 5, name = "merchantPosId")
-    private String merchantPosId;
-
     @Column(length = 5, name = "confirmationCode")
     private int confirmationCode;
 
-    public LocalDateTime getPaymentDate() {
-        return paymentDate;
-    }
+    @Column(length = 5, name = "isPaybackStatus")
+    private Boolean isPaybackStatus = false;
+
+    @Column(length = 5, name = "totalReportedAmount")
+    private float totalReportedAmount;
+
+    @Column(length = 5, name = "totalPaybackAmount")
+    private float totalPaybackAmount;
 
     public void setPaymentDate(LocalDateTime paymentDate) {
         this.paymentDate = LocalDateTime.now();
+    }
+
+    public LocalDateTime getPaymentDate() {
+        return paymentDate;
     }
 
 }

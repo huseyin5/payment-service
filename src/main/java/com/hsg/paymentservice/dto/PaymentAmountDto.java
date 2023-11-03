@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PaymentAmountDto {
     private float amount;
+    private float totalReportedAmount;
 }
