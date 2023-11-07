@@ -15,4 +15,6 @@ public interface PaymentRepository extends JpaRepository<Payment, String> {
     Boolean existsByConfirmationCode(int confirmationCode);
 
     Boolean existsByPaymentId(String paymentId);
+
+    List<Payment> findAllByMerchantPos_MerchantPosIdAndIsPaybackStatusFalse(String merchantPos);
 }

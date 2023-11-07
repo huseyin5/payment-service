@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MerchantPosRepository extends JpaRepository<MerchantPos, String> {
     MerchantPos findByMerchantPosId(String merchantPosId);
+
+
 }

@@ -16,13 +16,13 @@ public class MerchantPos {
 
     @Id
     @SequenceGenerator(name = "seq_merchantPos", allocationSize = 1)
-    @Column(length = 5, name = "merchantPosId")
+    @Column(name = "merchantPosId")
     private String merchantPosId;
 
-    @Column(length = 50, name = "merchantName")
+    @Column(name = "merchantName")
     private String merchantName;
 
-    @OneToMany(mappedBy = "merchantPos")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "merchantPos")
     private List<Payment> payments;
 
     @OneToMany(mappedBy = "merchantPos")

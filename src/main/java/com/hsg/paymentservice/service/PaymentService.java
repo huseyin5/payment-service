@@ -1,6 +1,5 @@
 package com.hsg.paymentservice.service;
 
-import com.hsg.paymentservice.configuration.DtoConverterService;
 import com.hsg.paymentservice.dtos.PaymentRequestDto;
 import com.hsg.paymentservice.dtos.PaymentResponseDto;
 import com.hsg.paymentservice.entity.MerchantPos;
@@ -57,10 +56,10 @@ public class PaymentService {
     }
 
 
-
-
     public String getReportByMerchantPosId(String merchantPosId) {
-        List<Payment> payments = paymentRepository.findByMerchantPosAndIsReported(merchantPosRepository.findByMerchantPosId(merchantPosId), false);
+
+        MerchantPos merchantPosIdIndex = merchantPosRepository.findByMerchantPosId(merchantPosId);
+        List<Payment> payments = paymentRepository.findByMerchantPosAndIsReported(merchantPosIdIndex, false);
 
         float totalAmount = 0;
         for (Payment payment : payments) {
@@ -76,20 +75,4 @@ public class PaymentService {
         return "Total amount for merchantPosId " + merchantPosId + " is " + finalTotalAmount + " TL";
     }
 
-//    public String getReport() {
-//        List<Payment> payments = paymentRepository.findByIsReported(false);
-//        List<MerchantPos> merchantPosList = merchantPosRepository.findAll();
-//
-//        float totalAmount = 0;
-//        for (Payment payment : payments) {
-//            totalAmount += payment.getPaymentAmount();
-//        }
-//
-//        float finalTotalAmount = totalAmount;
-//        payments.forEach(payment -> payment.setTotalReportedAmount(finalTotalAmount + payment.getTotalReportedAmount()));
-//        payments.forEach(payment -> payment.setIsReported(true));
-//        paymentRepository.saveAll(payments);
-//
-//        return "Total amount is " + finalTotalAmount + " TL";
-//    }
 }

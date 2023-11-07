@@ -16,16 +16,16 @@ public class Payback {
 
     @Id
     @SequenceGenerator(name = "seq_payback", allocationSize = 1)
-    @Column(length = 5, name = "paybackId")
+    @Column(name = "paybackId")
     private String paybackId = UUID.randomUUID().toString();
 
-    @Column(length = 5, name = "paybackAmount")
+    @Column(name = "paybackAmount")
     private float paybackAmount;
 
-    @Column(length = 5, name = "profitAmount")
+    @Column(name = "profitAmount")
     private float profitAmount;
 
     @ManyToOne
-    @JoinColumn(name = "merchantPos_merchantPosId")
+    @JoinColumn(name = "merchantPosId")
     private MerchantPos merchantPos;
 }

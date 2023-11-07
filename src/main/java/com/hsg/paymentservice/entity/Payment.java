@@ -17,33 +17,33 @@ public class Payment {
 
     @Id
     @SequenceGenerator(name = "seq_payment", allocationSize = 1)
-    @Column(length = 5, name = "paymentId")
+    @Column(name = "paymentId")
     private String paymentId;
 
-    @Column(length = 10, name = "paymentAmount")
+    @Column( name = "paymentAmount")
     private float paymentAmount;
 
-    @Column(length = 4, name = "ccNo")
+    @Column(name = "ccNo")
     private int creditCardNo;
 
-    @Column(length = 16, name = "paymentDate")
+    @Column(name = "paymentDate")
     private LocalDateTime paymentDate;
 
-    @Column(length = 5, name = "isReported")
+    @Column(name = "isReported")
     private Boolean isReported = false;
 
-    @Column(length = 5, name = "confirmationCode")
+    @Column(name = "confirmationCode")
     private int confirmationCode;
 
-    @Column(length = 5, name = "totalReportedAmount")
+    @Column(name = "totalReportedAmount")
     private float totalReportedAmount;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "merchant_pos_id")
+    @JoinColumn(name = "merchant_pos_id",referencedColumnName = "merchantPosId")
     private MerchantPos merchantPos;
 
-    @Column(length = 5, name = "isPaybackStatus")
+    @Column(name = "isPaybackStatus")
     private Boolean isPaybackStatus = false;
 
     public void setPaymentDate(LocalDateTime paymentDate) {
