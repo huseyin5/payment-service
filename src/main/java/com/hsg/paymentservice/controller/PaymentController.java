@@ -1,10 +1,11 @@
 package com.hsg.paymentservice.controller;
 
-import com.hsg.paymentservice.dto.PaymentRequestDto;
-import com.hsg.paymentservice.dto.PaymentResponseDto;
+import com.hsg.paymentservice.dtos.PaymentRequestDto;
+import com.hsg.paymentservice.dtos.PaymentResponseDto;
 import com.hsg.paymentservice.entity.Payment;
 import com.hsg.paymentservice.service.PaymentService;
 import lombok.AllArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -19,15 +20,15 @@ public class PaymentController {
 
     private final PaymentService paymentService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PaymentResponseDto> getPaymentDetail(@PathVariable("id") String id) {
-        return ResponseEntity.ok(paymentService.getPaymentDetail(id));
+    @GetMapping
+    public ResponseEntity<List<Payment>> getAllPayments() {
+        return ResponseEntity.ok(paymentService.getAllPayments());
     }
 
     @PostMapping
     public ResponseEntity<?> savePayment(@Validated @RequestBody PaymentRequestDto paymentRequestDto) {
         try {
-            Payment payment = paymentService.savePayment(paymentRequestDto);
+            PaymentRequestDto payment = paymentService.savePayment(paymentRequestDto);
             return new ResponseEntity<>(payment, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -36,14 +37,9 @@ public class PaymentController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<List<PaymentResponseDto>> getAllPayments() {
-        return ResponseEntity.ok(paymentService.getAllPayments());
-    }
-
-    @GetMapping("/report")
-    public ResponseEntity<String> getReport() {
-        return ResponseEntity.ok(paymentService.getReport());
+    @GetMapping("/{paymentId}")
+    public ResponseEntity<PaymentResponseDto> getPaymentDetail(@PathVariable("paymentId") String paymentId) {
+        return ResponseEntity.ok(paymentService.getPaymentDetail(paymentId));
     }
 
     @GetMapping("/report/{merchantPosId}")

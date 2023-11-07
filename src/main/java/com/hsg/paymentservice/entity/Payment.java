@@ -1,11 +1,10 @@
 package com.hsg.paymentservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "payment")
@@ -18,20 +17,14 @@ public class Payment {
 
     @Id
     @SequenceGenerator(name = "seq_payment", allocationSize = 1)
-    @Column(length = 36, name = "approvalCode")
-    private String approvalCode = UUID.randomUUID().toString();
+    @Column(length = 5, name = "paymentId")
+    private String paymentId;
 
-    @Column(length = 10, name = "amount")
-    private float amount;
+    @Column(length = 10, name = "paymentAmount")
+    private float paymentAmount;
 
     @Column(length = 4, name = "ccNo")
     private int creditCardNo;
-
-    @Column(length = 5, name = "merchantId")
-    private String merchantId;
-
-    @Column(length = 5, name = "merchantPosId")
-    private String merchantPosId;
 
     @Column(length = 16, name = "paymentDate")
     private LocalDateTime paymentDate;
@@ -42,14 +35,16 @@ public class Payment {
     @Column(length = 5, name = "confirmationCode")
     private int confirmationCode;
 
-    @Column(length = 5, name = "isPaybackStatus")
-    private Boolean isPaybackStatus = false;
-
     @Column(length = 5, name = "totalReportedAmount")
     private float totalReportedAmount;
 
-    @Column(length = 5, name = "totalPaybackAmount")
-    private float totalPaybackAmount;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "merchant_pos_id")
+    private MerchantPos merchantPos;
+
+    @Column(length = 5, name = "isPaybackStatus")
+    private Boolean isPaybackStatus = false;
 
     public void setPaymentDate(LocalDateTime paymentDate) {
         this.paymentDate = LocalDateTime.now();

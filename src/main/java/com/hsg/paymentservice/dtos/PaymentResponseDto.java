@@ -1,4 +1,4 @@
-package com.hsg.paymentservice.dto;
+package com.hsg.paymentservice.dtos;
 
 import lombok.*;
 
@@ -9,15 +9,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PaymentResponseDto {
 
-    private String approvalCode;
-    private float amount;
+    private String paymentId;
+    private float paymentAmount;
     private int creditCardNo;
-    private String merchantId;
     private LocalDateTime paymentDate;
     private Boolean isReported;
     private String merchantPosId;
     private int confirmationCode;
     private Boolean isPaybackStatus;
     private float totalReportedAmount;
-    private float totalPaybackAmount;
 }
