@@ -1,5 +1,6 @@
 package com.hsg.paymentservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,7 @@ public class Payback {
     @Column(name = "profitAmount")
     private float profitAmount;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "merchantPosId")
     private MerchantPos merchantPos;

@@ -31,4 +31,9 @@ public class MerchantPosController {
     public ResponseEntity<MerchantPosResponseDto> getMerchantDetail(@PathVariable("merchantPosId") String merchantPosId) {
         return ResponseEntity.ok(merchantPosService.getMerchantDetail(merchantPosId));
     }
+
+    @GetMapping("/report/{merchantPosId}")
+    public ResponseEntity<String> getReportByMerchantPosId(@PathVariable("merchantPosId") String merchantPosId) {
+        return ResponseEntity.ok(merchantPosService.getMerchantPosIdTotalPaybackAmount(merchantPosId));
+    }
 }

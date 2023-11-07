@@ -27,4 +27,9 @@ public class PaybackController {
     public ResponseEntity<String> getPaybackMerchantPosId(@PathVariable("merchantPosId") String merchantPosId) {
         return ResponseEntity.ok(paybackService.getPaybackMerchantPosId(merchantPosId));
     }
+
+    @GetMapping("/profit")
+    public ResponseEntity<String> getTotalProfitAmount() {
+        return ResponseEntity.ok(paybackService.getTotalProfitAmount());
+    }
 }

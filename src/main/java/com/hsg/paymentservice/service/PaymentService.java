@@ -38,6 +38,7 @@ public class PaymentService {
 
         payment = paymentRepository.save(payment);
         paymentRequestDto.setPaymentId(payment.getPaymentId());
+        paymentRequestDto.setPaymentDate(payment.getPaymentDate());
         return paymentRequestDto;
     }
 
