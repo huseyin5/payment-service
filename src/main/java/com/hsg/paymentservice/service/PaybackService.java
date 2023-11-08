@@ -24,7 +24,6 @@ public class PaybackService {
     private final PaybackRepository paybackRepository;
     private final PaymentRepository paymentRepository;
     private final MerchantPosRepository merchantPosRepository;
-    private final ModelMapper modelmapper;
 
     public List<Payback> getAllPayback() {
         return paybackRepository.findAll();
