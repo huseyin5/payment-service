@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PaymentResponseDto {
 
-    private String paymentId;
+    private Long paymentId;
     private float paymentAmount;
     private int creditCardNo;
     private LocalDateTime paymentDate;

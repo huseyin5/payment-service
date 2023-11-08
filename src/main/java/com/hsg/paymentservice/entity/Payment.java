@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "payment")
@@ -18,7 +19,8 @@ public class Payment {
     @Id
     @SequenceGenerator(name = "seq_payment", allocationSize = 1)
     @Column(name = "paymentId")
-    private String paymentId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long paymentId;
 
     @Column( name = "paymentAmount")
     private float paymentAmount;
