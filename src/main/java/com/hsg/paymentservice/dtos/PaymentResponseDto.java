@@ -15,7 +15,7 @@ public class PaymentResponseDto {
     private LocalDateTime paymentDate;
     private Boolean isReported;
     private String merchantPosId;
-    private int confirmationCode;
+    private String confirmationCode;
     private Boolean isPaybackStatus;
     private float totalReportedAmount;
 }

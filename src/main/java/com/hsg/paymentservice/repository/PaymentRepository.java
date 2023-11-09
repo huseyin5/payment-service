@@ -12,9 +12,7 @@ public interface PaymentRepository extends JpaRepository<Payment, String> {
 
     List<Payment> findByMerchantPosAndIsReported(MerchantPos merchantPos, Boolean isReported);
 
-    Boolean existsByConfirmationCode(int confirmationCode);
-
-//    Boolean existsByPaymentId(String paymentId);
+    Boolean existsByConfirmationCode(String confirmationCode);
 
     List<Payment> findAllByMerchantPos_MerchantPosIdAndIsPaybackStatusFalse(String merchantPos);
 }

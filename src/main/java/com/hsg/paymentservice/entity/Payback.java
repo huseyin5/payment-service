@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -30,4 +31,16 @@ public class Payback {
     @ManyToOne
     @JoinColumn(name = "merchantPosId")
     private MerchantPos merchantPos;
+
+
+    @Column(name = "paybackDate")
+    private LocalDateTime paybackDate;
+
+    public LocalDateTime getPaybackDate() {
+        return paybackDate;
+    }
+
+    public void setPaybackDate(LocalDateTime paybackDate) {
+        this.paybackDate = paybackDate = LocalDateTime.now();
+    }
 }

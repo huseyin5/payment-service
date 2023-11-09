@@ -33,10 +33,6 @@ public class PaymentService {
             throw new IllegalArgumentException("Confirmation code is already used");
         }
 
-//        if (paymentRepository.existsByPaymentId(payment.getPaymentId())) {
-//            throw new IllegalArgumentException("Payment id is already used");
-//        }
-
         payment = paymentRepository.save(payment);
         paymentRequestDto.setPaymentId(payment.getPaymentId());
         paymentRequestDto.setPaymentDate(payment.getPaymentDate());
@@ -49,14 +45,9 @@ public class PaymentService {
         return modelMapper.map(payment, PaymentResponseDto.class);
     }
 
-    public Boolean existsConfirmationCode(int confirmationCode) {
+    public Boolean existsConfirmationCode(String confirmationCode) {
         return paymentRepository.existsByConfirmationCode(confirmationCode);
     }
-
-//    public Boolean existsPaymentId(String paymentId) {
-//        return paymentRepository.existsByPaymentId(paymentId);
-//    }
-
 
     public String getReportByMerchantPosId(String merchantPosId) {
 

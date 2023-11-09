@@ -35,7 +35,7 @@ public class Payment {
     private Boolean isReported = false;
 
     @Column(name = "confirmationCode")
-    private int confirmationCode;
+    private String confirmationCode=UUID.randomUUID().toString();
 
     @Column(name = "totalReportedAmount")
     private float totalReportedAmount;

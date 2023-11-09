@@ -6,6 +6,7 @@ import com.hsg.paymentservice.entity.MerchantPos;
 import com.hsg.paymentservice.service.MerchantPosService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class MerchantPosController {
     }
 
     @PostMapping
-    public ResponseEntity<MerchantPosRequestDto> saveMerchantPos(@RequestBody MerchantPosRequestDto merchantPosRequestDto) {
+    public ResponseEntity<MerchantPosRequestDto> saveMerchantPos(@Validated @RequestBody MerchantPosRequestDto merchantPosRequestDto) {
         return ResponseEntity.ok(merchantPosService.saveMerchantPos(merchantPosRequestDto));
     }
 

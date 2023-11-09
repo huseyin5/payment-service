@@ -1,21 +1,13 @@
 package com.hsg.paymentservice.service;
 
-import com.hsg.paymentservice.dtos.MerchantPosResponseDto;
-import com.hsg.paymentservice.dtos.PaybackDto;
-import com.hsg.paymentservice.entity.MerchantPos;
 import com.hsg.paymentservice.entity.Payback;
 import com.hsg.paymentservice.entity.Payment;
 import com.hsg.paymentservice.repository.MerchantPosRepository;
 import com.hsg.paymentservice.repository.PaybackRepository;
 import com.hsg.paymentservice.repository.PaymentRepository;
-import com.hsg.paymentservice.utilities.DataResult;
-import com.hsg.paymentservice.utilities.SuccessDataResult;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
